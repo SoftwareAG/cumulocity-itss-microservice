@@ -3,6 +3,8 @@ package itss.type;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ITSS_SensorValue {
 
@@ -11,7 +13,7 @@ public class ITSS_SensorValue {
     @JsonProperty("ITSS_SensorId")
     String itssSensorId;
     @JsonProperty("Value")
-    float value;
+    BigDecimal value;
     @JsonProperty("ITSS_SensorType")
     String itssSensorType;
     @JsonProperty("ITSS_SensorPosition")
@@ -29,10 +31,10 @@ public class ITSS_SensorValue {
     public void setItssSensorId(String itssSensorId) {
         this.itssSensorId = itssSensorId;
     }
-    public float getValue() {
+    public BigDecimal getValue() {
         return value;
     }
-    public void setValue(float value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
     public String getItssSensorType() {

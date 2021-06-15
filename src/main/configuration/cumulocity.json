@@ -4,6 +4,10 @@
   "provider": {
     "name":"Software AG"
   },
+  "resources": {
+    "cpu": "2",
+    "memory": "2G"
+  },
   "isolation":"PER_TENANT",
   "requiredRoles": [
     "ROLE_INVENTORY_READ",

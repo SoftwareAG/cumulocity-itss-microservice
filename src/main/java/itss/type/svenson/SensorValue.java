@@ -4,10 +4,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.svenson.AbstractDynamicProperties;
 import org.svenson.JSONProperty;
 
+import java.math.BigDecimal;
+
 public class SensorValue extends AbstractDynamicProperties {
     long samplingUTCTimestamp;
     String itssSensorId;
-    float value;
+    BigDecimal value;
     String itssSensorType;
     String itssSensorPosition;
 
@@ -27,11 +29,11 @@ public class SensorValue extends AbstractDynamicProperties {
         this.itssSensorId = itssSensorId;
     }
 
-    public float getValue() {
+    public BigDecimal getValue() {
         return value;
     }
 
-    public void setValue(float value) {
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
     @JSONProperty(

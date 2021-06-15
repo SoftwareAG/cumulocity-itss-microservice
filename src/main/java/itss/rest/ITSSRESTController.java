@@ -2,6 +2,7 @@ package itss.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import itss.service.ITSSService;
+import itss.service.TheftExService;
 import itss.type.AssembledNotification;
 import itss.type.ITSS_SensorValue;
 import itss.type.ITSS_SensorValues;
@@ -25,6 +26,9 @@ public class ITSSRESTController {
 
     @Autowired
     ITSSService itssService;
+
+    @Autowired
+    TheftExService theftExService;
 
     ObjectMapper mapper = new ObjectMapper();
 
