@@ -94,9 +94,9 @@ public class ITSSService {
                 }
             }
 
-            long utcTimestamp = shock.getTimestamp();
+            long utcTimestamp = shock.getTimestamp()*1000;
             ManagedObjectRepresentation mor = upsertITSSDevice(deviceId, deviceId, pos, null,null, utcTimestamp, null, xAxis, yAxis, zAxis, null, null, address, null);
-            c8YClient.createPositionEvent(pos, mor, utcTimestamp*1000);
+            c8YClient.createPositionEvent(pos, mor, utcTimestamp);
             if (xAxisTriggered || yAxisTriggered || zAxisTriggered) {
                 createShockEvent(mor, utcTimestamp, xAxisTriggered, yAxisTriggered, zAxisTriggered, xAxis, yAxis, zAxis);
                 createShockMeasurement(mor,shock.getxAxis(), shock.getyAxis(), shock.getzAxis(), utcTimestamp);
