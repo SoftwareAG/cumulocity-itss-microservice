@@ -7,17 +7,17 @@ import org.svenson.JSONProperty;
 import java.math.BigDecimal;
 
 public class SensorValue extends AbstractDynamicProperties {
-    long samplingUTCTimestamp;
+    BigDecimal samplingUTCTimestamp;
     String itssSensorId;
     BigDecimal value;
     String itssSensorType;
     String itssSensorPosition;
 
-    public long getSamplingUTCTimestamp() {
+    public BigDecimal getSamplingUTCTimestamp() {
         return samplingUTCTimestamp;
     }
 
-    public void setSamplingUTCTimestamp(long samplingUTCTimestamp) {
+    public void setSamplingUTCTimestamp(BigDecimal samplingUTCTimestamp) {
         this.samplingUTCTimestamp = samplingUTCTimestamp;
     }
 

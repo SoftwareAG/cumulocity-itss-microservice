@@ -4,6 +4,8 @@ package itss.type;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.math.BigDecimal;
+
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class LoadingState {
     @JsonProperty(value = "ITSS_TransportDeviceID")
@@ -11,7 +13,7 @@ public class LoadingState {
     @JsonProperty(value = "ITSS_TelematicsDeviceID")
     String itssTelematicsDeviceId;
     @JsonProperty(value = "UTCtimestamp")
-    long utcTimestamp;
+    BigDecimal utcTimestamp;
     @JsonProperty(value = "GNSS_Position")
     GNSS_Position gnssPosition;
     @JsonProperty(value = "ITSS_LoadingState")
@@ -34,10 +36,10 @@ public class LoadingState {
     public void setItssTelematicsDeviceId(String itssTelematicsDeviceId) {
         this.itssTelematicsDeviceId = itssTelematicsDeviceId;
     }
-    public long getFromUTCTimestamp() {
+    public BigDecimal getFromUTCTimestamp() {
         return utcTimestamp;
     }
-    public void setFromUTCTimestamp(long utcTimestamp) {
+    public void setFromUTCTimestamp(BigDecimal utcTimestamp) {
         this.utcTimestamp = utcTimestamp;
     }
     public GNSS_Position getGnssPosition() {

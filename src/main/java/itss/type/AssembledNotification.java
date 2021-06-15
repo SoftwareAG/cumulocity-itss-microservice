@@ -14,7 +14,7 @@ public class AssembledNotification {
     @JsonProperty(value = "ITSS_TelematicsDeviceID")
     String itssTelematicsDeviceId;
     @JsonProperty(value = "UTCtimestamp")
-    long utcTimestamp;
+    BigDecimal utcTimestamp;
     @JsonProperty(value = "GNSS_Position")
     GNSS_Position gnssPosition;
     @JsonProperty(value = "mileage")
@@ -22,7 +22,7 @@ public class AssembledNotification {
     @JsonProperty(value = "loadingState")
     String loadingState;
     @JsonProperty(value = "payload")
-    long payload;
+    BigDecimal payload;
     @JsonProperty(value = "ITSS_SensorValueList")
     List<ITSS_SensorValue> itssSensorValueList;
     @JsonProperty(value = "ITSS_GeofenceEventList")
@@ -62,11 +62,11 @@ public class AssembledNotification {
         this.itssTelematicsDeviceId = itssTelematicsDeviceId;
     }
 
-    public long getUtcTimestamp() {
+    public BigDecimal getUtcTimestamp() {
         return utcTimestamp;
     }
 
-    public void setUtcTimestamp(long utcTimestamp) {
+    public void setUtcTimestamp(BigDecimal utcTimestamp) {
         this.utcTimestamp = utcTimestamp;
     }
 
@@ -94,11 +94,11 @@ public class AssembledNotification {
         this.loadingState = loadingState;
     }
 
-    public long getPayload() {
+    public BigDecimal getPayload() {
         return payload;
     }
 
-    public void setPayload(long payload) {
+    public void setPayload(BigDecimal payload) {
         this.payload = payload;
     }
 

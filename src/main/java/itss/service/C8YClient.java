@@ -87,8 +87,8 @@ public class C8YClient {
         return eventApi.create(eventRepresentation);
     }
 
-    public EventRepresentation createPositionEvent(Position position, ManagedObjectRepresentation mor, long utcTimestamp) {
-        DateTime dt = new DateTime(utcTimestamp);
+    public EventRepresentation createPositionEvent(Position position, ManagedObjectRepresentation mor, BigDecimal utcTimestamp) {
+        DateTime dt = new DateTime(utcTimestamp.longValue());
         return createPositionEvent(position, mor, dt);
     }
 }

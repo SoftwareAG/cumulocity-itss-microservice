@@ -8,7 +8,7 @@ import java.math.BigDecimal;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class GNSS_Position {
     @JsonProperty("GNSS_UTCtimestamp")
-    long gnssUTCtimestamp;
+    BigDecimal gnssUTCtimestamp;
     @JsonProperty("GNSS_Latitude")
     BigDecimal gnssLatitude;
     @JsonProperty("GNSS_Longitude")
@@ -24,11 +24,11 @@ public class GNSS_Position {
     @JsonProperty("ITSS_LocationInfo")
     ITSS_LocationInfo locationInfo;
 
-    public long getGnssUTCtimestamp() {
+    public BigDecimal getGnssUTCtimestamp() {
         return gnssUTCtimestamp;
     }
 
-    public void setGnssUTCtimestamp(long gnssUTCtimestamp) {
+    public void setGnssUTCtimestamp(BigDecimal gnssUTCtimestamp) {
         this.gnssUTCtimestamp = gnssUTCtimestamp;
     }
 

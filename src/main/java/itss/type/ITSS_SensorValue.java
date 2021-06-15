@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 public class ITSS_SensorValue {
 
     @JsonProperty("SamplingUTCTimestamp")
-    long samplingUTCTimestamp;
+    BigDecimal samplingUTCTimestamp;
     @JsonProperty("ITSS_SensorId")
     String itssSensorId;
     @JsonProperty("Value")
@@ -19,10 +19,10 @@ public class ITSS_SensorValue {
     @JsonProperty("ITSS_SensorPosition")
     String itssSensorPosition;
 
-    public long getSamplingUTCTimestamp() {
+    public BigDecimal getSamplingUTCTimestamp() {
         return samplingUTCTimestamp;
     }
-    public void setSamplingUTCTimestamp(long samplingUTCTimestamp) {
+    public void setSamplingUTCTimestamp(BigDecimal samplingUTCTimestamp) {
         this.samplingUTCTimestamp = samplingUTCTimestamp;
     }
     public String getItssSensorId() {

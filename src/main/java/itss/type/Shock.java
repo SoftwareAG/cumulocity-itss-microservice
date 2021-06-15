@@ -17,7 +17,7 @@ public class Shock {
     @JsonProperty(value = "GNSS_Position")
     GNSS_Position gnssPosition;
     @JsonProperty("UTCtimestamp")
-    long timestamp;
+    BigDecimal timestamp;
     @JsonProperty("X-Axis_triggered")
     boolean xAxisTriggered;
     @JsonProperty("Y-Axis_triggered")
@@ -63,11 +63,11 @@ public class Shock {
         this.gnssPosition = gnssPosition;
     }
 
-    public long getTimestamp() {
+    public BigDecimal getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(long timestamp) {
+    public void setTimestamp(BigDecimal timestamp) {
         this.timestamp = timestamp;
     }
 

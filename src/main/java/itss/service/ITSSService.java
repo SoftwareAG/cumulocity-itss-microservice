@@ -16,7 +16,6 @@ import com.cumulocity.sdk.client.measurement.MeasurementApi;
 import itss.type.*;
 import itss.type.svenson.Address;
 import itss.type.svenson.SensorValue;
-import itss.utils.Utils;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,7 +93,7 @@ public class ITSSService {
                 }
             }
 
-            long utcTimestamp = shock.getTimestamp()*1000;
+            BigDecimal utcTimestamp = shock.getTimestamp().multiply(BigDecimal.valueOf(1000));
             ManagedObjectRepresentation mor = upsertITSSDevice(deviceId, deviceId, pos, null,null, utcTimestamp, null, xAxis, yAxis, zAxis, null, null, address, null);
             c8YClient.createPositionEvent(pos, mor, utcTimestamp);
             if (xAxisTriggered || yAxisTriggered || zAxisTriggered) {
@@ -134,8 +133,8 @@ public class ITSSService {
                 String loadingState = assembledNotification.getLoadingState();
                 long mileage = assembledNotification.getMileage();
                 String movementState = assembledNotification.getMovementState();
-                long payload = assembledNotification.getPayload();
-                long utcTimestamp = assembledNotification.getUtcTimestamp()*1000;
+                BigDecimal payload = assembledNotification.getPayload();
+                BigDecimal utcTimestamp = assembledNotification.getUtcTimestamp().multiply(BigDecimal.valueOf(1000));
                 BigDecimal xAxis = assembledNotification.getxAxis();
                 BigDecimal yAxis = assembledNotification.getyAxis();
                 BigDecimal zAxis = assembledNotification.getzAxis();
@@ -145,7 +144,7 @@ public class ITSSService {
                 ManagedObjectRepresentation mor = upsertITSSDevice(deviceId, deviceId, pos, speed, movementState, utcTimestamp, mileage, xAxis, yAxis, zAxis, loadingState, payload, address, sensorValueList);
                 createSensorMeasurements(sensorValueList, mor);
                 if(pos != null && position != null)
-                    c8YClient.createPositionEvent(pos, mor, position.getGnssUTCtimestamp()*1000);
+                    c8YClient.createPositionEvent(pos, mor, position.getGnssUTCtimestamp().multiply(BigDecimal.valueOf(1000)));
                 if (xAxisTriggered || yAxisTriggered || zAxisTriggered) {
                     createShockEvent(mor, utcTimestamp, xAxisTriggered, yAxisTriggered, zAxisTriggered, xAxis, yAxis, zAxis);
                     createShockMeasurement(mor, xAxis, yAxis, zAxis, utcTimestamp);
@@ -156,10 +155,10 @@ public class ITSSService {
         });
     }
 
-    public EventRepresentation createShockEvent(ManagedObjectRepresentation mor, long utcTimestamp, Boolean xAxisTriggered, Boolean yAxisTriggered, Boolean zAxisTriggered, BigDecimal xAxis, BigDecimal yAxis, BigDecimal zAxis) {
+    public EventRepresentation createShockEvent(ManagedObjectRepresentation mor, BigDecimal utcTimestamp, Boolean xAxisTriggered, Boolean yAxisTriggered, Boolean zAxisTriggered, BigDecimal xAxis, BigDecimal yAxis, BigDecimal zAxis) {
         EventRepresentation eventRepresentation = new EventRepresentation();
         eventRepresentation.setSource(mor);
-        DateTime dt = new DateTime(utcTimestamp);
+        DateTime dt = new DateTime(utcTimestamp.longValue());
         eventRepresentation.setDateTime(dt);
         eventRepresentation.set(xAxisTriggered, "itss_XAxisTriggered");
         eventRepresentation.set(yAxisTriggered, "itss_YAxisTriggered");
@@ -173,8 +172,8 @@ public class ITSSService {
         return eventApi.create(eventRepresentation);
     }
 
-    public MeasurementRepresentation createShockMeasurement(ManagedObjectRepresentation mor, BigDecimal xValue, BigDecimal yValue, BigDecimal zValue, long utcTimestamp) {
-        DateTime dateTime = new DateTime(utcTimestamp);
+    public MeasurementRepresentation createShockMeasurement(ManagedObjectRepresentation mor, BigDecimal xValue, BigDecimal yValue, BigDecimal zValue, BigDecimal utcTimestamp) {
+        DateTime dateTime = new DateTime(utcTimestamp.longValue());
         xValue = xValue.divide(BigDecimal.valueOf(1000));
         yValue = yValue.divide(BigDecimal.valueOf(1000));
         zValue = zValue.divide(BigDecimal.valueOf(1000));
@@ -201,7 +200,7 @@ public class ITSSService {
     public void createSensorMeasurements(List<ITSS_SensorValue> sensorValueList, ManagedObjectRepresentation mor) {
         if(sensorValueList != null) {
             for (ITSS_SensorValue sensorValue : sensorValueList) {
-                DateTime dateTime = new DateTime(sensorValue.getSamplingUTCTimestamp()*1000);
+                DateTime dateTime = new DateTime(sensorValue.getSamplingUTCTimestamp().multiply(BigDecimal.valueOf(1000)).longValue());
                 BigDecimal value = sensorValue.getValue();
                 String sensorId = sensorValue.getItssSensorId();
                 String sensorType = sensorValue.getItssSensorType() != null ? sensorValue.getItssSensorType() : "c8y_Sensor";
@@ -219,7 +218,7 @@ public class ITSSService {
         }
     }
 
-    private ManagedObjectRepresentation upsertITSSDevice(String name, String id, Position position, BigDecimal speed, String movementState, Long utcTimestamp, Long mileage, BigDecimal xAxis, BigDecimal yAxis, BigDecimal zAxis, String loadingState, Long payload, Address  address, List<ITSS_SensorValue> sensorValueList) {
+    private ManagedObjectRepresentation upsertITSSDevice(String name, String id, Position position, BigDecimal speed, String movementState, BigDecimal utcTimestamp, Long mileage, BigDecimal xAxis, BigDecimal yAxis, BigDecimal zAxis, String loadingState, BigDecimal payload, Address  address, List<ITSS_SensorValue> sensorValueList) {
         try {
             logger.info("Upsert device with name {} and id {}", name, id);
             ExternalIDRepresentation extId = c8YClient.findExternalId(id, SERIAL);
@@ -242,7 +241,7 @@ public class ITSSService {
             if(movementState != null)
                 mor.set(movementState, "itss_MovementState");
 
-            mor.set(utcTimestamp, "itss_UTCTimestamp");
+            mor.set(utcTimestamp.longValue(), "itss_UTCTimestamp");
             if(mileage != null)
                 mor.set(mileage, "itss_Mileage");
             if(xAxis != null)
@@ -264,7 +263,7 @@ public class ITSSService {
                     sensorVal.setItssSensorId(sensorValue.getItssSensorId());
                     sensorVal.setItssSensorType(sensorValue.getItssSensorType());
                     sensorVal.setValue(sensorValue.getValue());
-                    sensorVal.setSamplingUTCTimestamp(sensorValue.getSamplingUTCTimestamp()*1000);
+                    sensorVal.setSamplingUTCTimestamp(sensorValue.getSamplingUTCTimestamp().multiply(BigDecimal.valueOf(1000)));
                     if("DeviceTemp".equals(sensorValue.getItssSensorId())) {
                        BigDecimal celsiusValue = sensorValue.getValue().subtract(BigDecimal.valueOf(273.15)).setScale(2, RoundingMode.HALF_UP);
                        sensorVal.setValue(celsiusValue);

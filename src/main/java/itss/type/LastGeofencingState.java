@@ -1,5 +1,6 @@
 package itss.type;
 
+import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -13,7 +14,7 @@ public class LastGeofencingState {
     @JsonProperty(value = "ITSS_TelematicsDeviceID")
     String itssTelematicsDeviceId;
     @JsonProperty(value = "UTCtimestamp")
-    long utcTimestamp;
+    BigDecimal utcTimestamp;
     @JsonProperty(value = "ITSS_GeofenceList")
     List <ITSS_Geofence> itssGeofenceList;
     @JsonProperty(value = "GNSS_Position")
@@ -33,10 +34,10 @@ public class LastGeofencingState {
     public void setItssTelematicsDeviceId(String itssTelematicsDeviceId) {
         this.itssTelematicsDeviceId = itssTelematicsDeviceId;
     }
-    public long getUtcTimestamp() {
+    public BigDecimal getUtcTimestamp() {
         return utcTimestamp;
     }
-    public void setUtcTimestamp(long utcTimestamp) {
+    public void setUtcTimestamp(BigDecimal utcTimestamp) {
         this.utcTimestamp = utcTimestamp;
     }
     public List<ITSS_Geofence> getItssSensorValueList() {
