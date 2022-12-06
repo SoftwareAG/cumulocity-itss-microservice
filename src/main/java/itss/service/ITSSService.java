@@ -283,7 +283,7 @@ public class ITSSService {
                 mor = inventoryApi.update(mor);
             return mor;
         } catch (SDKException e) {
-            logger.info("Error on creating DT Device", e);
+            logger.info("Error on creating ITSS Device", e);
             return null;
         }
     }

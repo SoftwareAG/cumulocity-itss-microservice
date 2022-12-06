@@ -10,7 +10,7 @@
 
 <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <c8y.version>1009.4.0</c8y.version>
+    <c8y.version>1015.0.190</c8y.version>
     <microservice.name>itss-microservice</microservice.name>
     <maven.compiler.source>11</maven.compiler.source>
     <maven.compiler.target>11</maven.compiler.target>
@@ -21,14 +21,14 @@
     <repository>
         <id>cumulocity</id>
         <layout>default</layout>
-        <url>http://download.cumulocity.com/maven/repository</url>
+        <url>https://download.cumulocity.com/maven/repository</url>
     </repository>
 </repositories>
 <pluginRepositories>
     <pluginRepository>
         <id>cumulocity</id>
         <layout>default</layout>
-        <url>http://download.cumulocity.com/maven/repository</url>
+        <url>https://download.cumulocity.com/maven/repository</url>
     </pluginRepository>
 </pluginRepositories>
 
